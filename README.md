@@ -55,13 +55,19 @@ bash
 O desde IntelliJ: Ejecutar AgendaApplication.java
 
 Configuración de Propiedades
+
 application.properties
 
 properties
+
 server.port=8080
+
 api.contactos.base-url=http://localhost:8080/api
+
 spring.main.web-application-type=SERVLET
+
 feign.client.config.default.loggerLevel=basic
+
 🎯 Uso de la Aplicación
 Pantalla Principal
 La interfaz se divide en tres secciones principales:
@@ -101,9 +107,13 @@ La aplicación expone los siguientes endpoints REST:
 
 Método	Endpoint	Descripción
 GET	/api/local/contactos	Obtener todos los contactos
+
 GET	/api/local/contactos/{id}	Obtener contacto por ID
+
 POST	/api/local/contactos	Crear nuevo contacto
+
 PUT	/api/local/contactos/{id}	Actualizar contacto
+
 DELETE	/api/local/contactos/{id}	Eliminar contacto
 
 🐛 Solución de Problemas
