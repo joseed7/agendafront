@@ -18,7 +18,6 @@ public class AgendafrontApplication {
     private MainFrame mainFrame;
 
     public static void main(String[] args) {
-        // Configurar para modo no headless (importante para Swing)
         System.setProperty("java.awt.headless", "false");
         SpringApplication.run(AgendafrontApplication.class, args);
     }
@@ -26,7 +25,9 @@ public class AgendafrontApplication {
     @Bean
     public CommandLineRunner commandLineRunner() {
         return args -> {
-            // Ejecutar en el Event Dispatch Thread de Swing
+            // Pequeño delay para asegurar que el servidor esté listo
+            Thread.sleep(1000);
+
             SwingUtilities.invokeLater(() -> {
                 mainFrame.initializeUI();
                 mainFrame.showFrame();
