@@ -2,12 +2,11 @@ package com.agendafront.webservicesclient;
 
 import com.agendafront.DTos.ContactoDTO;
 import com.agendafront.DTos.CrearContactoRequest;
-import org.springframework.cloud.openfeign.FeignClient;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "contacto-api-client", url = "${api.contactos.base-url:http://localhost:8080/api}")
 public interface ContactoApiClient {
 
     @GetMapping("/contactos")

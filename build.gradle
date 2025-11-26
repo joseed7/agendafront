@@ -12,34 +12,26 @@ repositories {
     mavenCentral()
 }
 
-ext {
-    set('springCloudVersion', "2023.0.0")
-}
-
 dependencies {
-    // Dependencias EXISTENTES que mantienes
+    // Spring Boot Starters
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // Base de datos
     implementation 'com.h2database:h2'
 
-    // NUEVAS dependencias para Servlets/JSP
-    implementation 'javax.servlet:javax.servlet-api:4.0.1'
-    implementation 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.3'
-    implementation 'javax.servlet:jstl:1.2'
+    // JAKARTA EE (Spring Boot 3) - NO javax
+    implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+    implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0'
+    implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
 
-    // Para compilar JSP
+    // JSP para Jakarta
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 
-    // Mantienes las que ya tienes
-    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    // Lombok
     compileOnly 'org.projectlombok:lombok'
-}
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-    }
-}
+    annotationProcessor 'org.projectlombok:lombok'
 
-tasks.named('test') {
-    useJUnitPlatform()
+    // Testing
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
