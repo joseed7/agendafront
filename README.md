@@ -1,132 +1,120 @@
-📱 Agenda App - Spring Boot + Swing
-Una aplicación de escritorio moderna para gestión de contactos, desarrollada con Spring Boot y Swing, que combina la potencia del backend Spring con una interfaz gráfica tradicional de Java.
+# 📱 Agenda Web - Spring Boot + Servlets + JSP
 
-🚀 Características
-CRUD Completo: Crear, leer, actualizar y eliminar contactos
+Una aplicación web completa para gestión de contactos desarrollada con Spring Boot 3.2.0, Servlets y JSP, implementando una arquitectura MVC moderna con transacciones multi-entidad.
 
-Interfaz Gráfica Amigable: Desarrollada con Java Swing
+## 🚀 Características
 
-Arquitectura Moderna: Spring Boot + Patrón MVC
+- **CRUD Completo**: Crear, leer, actualizar y eliminar contactos
+- **Interfaz Web Moderna**: Bootstrap 5 + JSP
+- **Arquitectura MVC**: Separación clara de responsabilidades
+- **Base de Datos H2**: Configuración en memoria para desarrollo
+- **Transacciones JPA**: Preparado para operaciones multi-entidad
+- **Validaciones**: Cliente y servidor integradas
 
-Comunicación REST: Cliente Feign para APIs externas
+## 🛠️ Tecnologías Utilizadas
 
-Validación de Datos: Formularios con validación integrada
+| Tecnología | Versión | Propósito |
+|------------|---------|-----------|
+| Spring Boot | 3.2.0 | Framework principal |
+| Java | 17 | Lenguaje de programación |
+| Jakarta EE | 9+ | Servlets, JSP, JPA |
+| H2 Database | 2.1.214 | Base de datos en memoria |
+| Bootstrap | 5.1.3 | Framework CSS |
+| JPA/Hibernate | 6.1+ | Persistencia ORM |
+| Gradle | 8.5 | Sistema de construcción |
 
-Persistencia: Modelo de datos relacional preparado para MySQL/PostgreSQL
+## 📁 Estructura del Proyecto
+src/main/java/com/agendafront/
+├── servlets/ # Controladores Web
+│ ├── ContactoServlet.java # Listar y crear contactos
+│ └── ContactoCrudServlet.java # Editar y eliminar contactos
+├── entities/ # Entidades JPA
+│ └── Contacto.java # Entidad principal
+├── service/ # Lógica de negocio
+│ └── ContactoService.java # Servicios transaccionales
+├── repository/ # Acceso a datos
+│ └── ContactoRepository.java # Repositorio JPA
+└── AgendaApplication.java # Clase principal
 
-🛠️ Tecnologías Utilizadas
-Tecnología	Versión	Propósito
-Java	17	Lenguaje de programación
-Spring Boot	3.2.0	Framework backend
-Spring Cloud OpenFeign	4.1.0	Cliente HTTP declarativo
-Gradle	8.5	Sistema de construcción
-Swing	-	Interfaz gráfica de usuario
-Lombok	-	Reducción de código boilerplate
+src/main/webapp/
+└── WebInfo/
+└── views/
+└── contactos/
+├── lista.jsp # Vista listar contactos
+└── editar.jsp # Vista editar contacto
 
-⚙️ Configuración e Instalación
-Prerrequisitos
-Java 17 o superior
+Acceso
+Aplicación: http://localhost:8080/contactos
 
-Gradle 8.5 o superior
+Consola H2: http://localhost:8080/h2-console
 
-IntelliJ IDEA
+JDBC URL: jdbc:h2:mem:testdb
 
-Clonar o descargar el proyecto
+Usuario: sa
 
-bash
-git clone <url-del-repositorio>
-cd agenda-app
-Configurar el JDK en IntelliJ
+Password: (vacío)
 
-File > Project Structure > Project SDK: Java 17
+🎯 Endpoints Principales
+Método	URL	Descripción
+GET	/contactos	Listar todos los contactos
+POST	/contactos	Crear nuevo contacto
+GET	/contactos/editar/{id}	Formulario edición contacto
+GET	/contactos/eliminar/{id}	Eliminar contacto
 
-File > Project Structure > Project language level: 17
-
-Habilitar Annotation Processing
-
-File > Settings > Build > Compiler > Annotation Processors
-
-Marcar "Enable annotation processing"
-
-Ejecutar la aplicación
-
-bash
-./gradlew bootRun
-O desde IntelliJ: Ejecutar AgendaApplication.java
-
-Configuración de Propiedades
-
+🔧 Configuración Principal
 application.properties
 
-properties
-
+# Servidor
 server.port=8080
 
-api.contactos.base-url=http://localhost:8080/api
+# Base de datos H2
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.username=sa
+spring.datasource.password=
 
-spring.main.web-application-type=SERVLET
+# JPA/Hibernate
+spring.jpa.hibernate.ddl-auto=create-drop
+spring.jpa.show-sql=true
 
-feign.client.config.default.loggerLevel=basic
+# Vistas JSP
+spring.mvc.view.prefix=/WEB-INF/views/
+spring.mvc.view.suffix=.jsp
 
-🎯 Uso de la Aplicación
-Pantalla Principal
-La interfaz se divide en tres secciones principales:
 
-Formulario de Contactos: Campos para ingresar datos del contacto
+build.gradle
 
-Tabla de Contactos: Lista todos los contactos existentes
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'com.h2database:h2'
+    implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+}
 
-Botones de Acción: Operaciones CRUD
+🚀 Funcionalidades Implementadas
+Operaciones CRUD
+Listar contactos con paginación preparada
 
-Funcionalidades
-Operación	Descripción	Shortcut
-Agregar	Crear nuevo contacto	Botón "Agregar"
-Editar	Modificar contacto existente	Doble clic en tabla
-Eliminar	Borrar contacto seleccionado	Botón "Eliminar"
-Actualizar	Refrescar lista de contactos	Botón "Actualizar"
-Validaciones
-✅ Nombre y apellido obligatorios
+Crear contactos con validación de formularios
 
-✅ Teléfono requerido
+Editar contactos con formularios pre-cargados
 
-✅ Formato de email válido (opcional)
+Eliminar contactos con confirmación
 
-🔧 Desarrollo
-Compilación
-bash
-./gradlew build
-Ejecución de Tests
-bash
-./gradlew test
-Generación de JAR ejecutable
-bash
-./gradlew bootJar
+Interfaz de Usuario
+Diseño responsive con Bootstrap 5
 
-🌐 API Endpoints
-La aplicación expone los siguientes endpoints REST:
+Validación en tiempo real en formularios
 
-Método	Endpoint	Descripción
-GET	/api/local/contactos	Obtener todos los contactos
+Mensajes de feedback para el usuario
 
-GET	/api/local/contactos/{id}	Obtener contacto por ID
+Navegación intuitiva entre vistas
 
-POST	/api/local/contactos	Crear nuevo contacto
+Características Técnicas
+Manejo de excepciones global
 
-PUT	/api/local/contactos/{id}	Actualizar contacto
+Logging de consultas SQL
 
-DELETE	/api/local/contactos/{id}	Eliminar contacto
+Configuración de perfiles (dev/prod)
 
-🐛 Solución de Problemas
-Error común: "Connection refused"
-Síntoma: Error al conectar con localhost:8080
-Solución: El backend mock está incluido, verificar que el puerto 8080 esté libre.
-
-Error: "Cannot resolve symbol Lombok"
-Solución:
-
-Habilitar annotation processing
-
-File > Invalidate Caches and Restart
-
-La ventana no aparece
-Solución: Verificar que java.awt.headless=false esté configurado
+Arquitectura escalable para nuevas funcionalidades
