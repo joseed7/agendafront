@@ -31,10 +31,11 @@ public class ContactoServlet extends HttpServlet {
             throws ServletException, IOException {
         List<Contacto> contactos = contactoService.findAll();
         request.setAttribute("listaContactos", contactos);
-        request.getRequestDispatcher("/webapp/WebInfo/views/contactos/lista.jsp")
+
+        // RUTA CORRECTA ↓
+        request.getRequestDispatcher("/WebInfo/views/contactos/lista.jsp")
                 .forward(request, response);
     }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String nombre = request.getParameter("nombre");
